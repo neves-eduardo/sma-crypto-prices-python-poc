@@ -23,6 +23,7 @@ def collect_data(symbol, time):
     dataframe['slow_sma'] = sma(dataframe['close'].tolist(), 30)
 
     dataframe.plot(x ='time', y='fast_sma', kind = 'line')
+    dataframe.plot(x ='time', y='slow_sma', kind = 'line')
     plt.show()
 
 
