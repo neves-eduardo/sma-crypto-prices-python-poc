@@ -1,14 +1,13 @@
 import pandas as pandas
 import requests
 import json
-
-import plotly.graph_objs as graph_objs
-from plotly.offline import plot
-
+import matplotlib.pyplot as plt
 from pyti.smoothed_moving_average import smoothed_moving_average as sma
 
 
-def collect_data(base, endpoint, symbol, time):
+def collect_data(symbol, time):
+    base = 'https://api.binance.com'
+    endpoint = '/api/v1/klines'
     params = '?&symbol='+symbol+'&interval=' + time
     data = requests.get(base + endpoint + params)
     dictionary = json.loads(data.text)
@@ -22,6 +21,9 @@ def collect_data(base, endpoint, symbol, time):
 
     dataframe['fast_sma'] = sma(dataframe['close'].tolist(), 10)
     dataframe['slow_sma'] = sma(dataframe['close'].tolist(), 30)
-    print(dataframe)
 
-collect_data('https://api.binance.com', '/api/v1/klines', 'BTCUSDT', '1h')
+    dataframe.plot(x ='time', y='fast_sma', kind = 'line')
+    plt.show()
+
+
+collect_data('BTCUSDT', '1h')
