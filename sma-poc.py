@@ -22,8 +22,8 @@ def collect_data(symbol, time):
     dataframe['fast_sma'] = sma(dataframe['close'].tolist(), 10)
     dataframe['slow_sma'] = sma(dataframe['close'].tolist(), 30)
 
-    dataframe.plot(x ='time', y='fast_sma', kind = 'line')
-    dataframe.plot(x ='time', y='slow_sma', kind = 'line')
+    dataframe.plot(x ='time', y='fast_sma', kind = 'line', title = 'fast sma in the last 10 days')
+    dataframe.plot(x ='time', y='slow_sma', kind = 'line', title = 'slow sma in the last 10 days')
     plt.show()
 
 
